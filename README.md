@@ -1,9 +1,19 @@
 # grub-ownership
 Show an owner when grub is booting up.
 
-## Installation
+It is looking like this:
 
 ```
+##########################
+# Owner:                 #
+# Alex Alexsen <a@a.tld> #
+##########################
+```
+
+
+## Installation
+
+```bash
 sudo make install
 # OR with an autotools like PREFIX:
 sudo PREFIX=/another/root make install
@@ -28,7 +38,7 @@ OWNER_TIMEOUT=10
 
 ## Uninstall
 
-```
+```bash
 sudo make uninstall
 # OR with an autotools like PREFIX:
 sudo PREFIX=/another/root make uninstall

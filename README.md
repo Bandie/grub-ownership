@@ -34,6 +34,15 @@ OWNER="Alex Alexsen <a@a.tld>"
 OWNER_TIMEOUT=10
 ```
 
+### Apply configuration
+
+To apply the configuration you need to regenerate the GRUB2 config.
+
+```bash
+grub-mkconfig -o /boot/grub/grub.cfg
+# OR on Debian like systems
+update-grub
+```
 
 
 ## Uninstall

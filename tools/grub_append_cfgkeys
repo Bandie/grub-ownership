@@ -1,0 +1,82 @@
+#!/bin/bash
+# Author: Bandie <bandie@chaospott.de>
+# Copyright: Bandie, 2019, GNU-GPLv3
+
+CONFIG="/etc/default/grub"
+TMPCFG="grub_tmp"
+CFGKEYS=(
+
+  ## 'COMMENT'
+  ## 'KEY'
+  ## 'EXAMPLE_VALUE'
+
+  'Name and mail address of owner'
+  'OWNER'
+  '"John Doe <john@doe.tld>"'
+  
+  'Amounts of seconds for how long the owner information is displayed. It is skippable via ESC. Default: 5'
+  'OWNER_TIMEOUT'
+  '5'
+)
+
+
+function testPerms(){
+  if ! [ -e "$CONFIG" ]; then
+    echo "$0: ERROR: $CONFIG does not exist!"
+    exit 1
+  fi
+  if ! [ -w "$CONFIG" ]; then
+    echo "$0: ERROR: Permission denied for file $CONFIG"
+    exit 1
+  fi
+}
+
+
+function append(){
+  testPerms
+
+  for ((i=0; i<${#CFGKEYS[@]}; i+=3)); do
+    cat "$CONFIG" | grep "${CFGKEYS[(($i+1))]}" >> /dev/null
+    if [ $? -ne 0 ]; then
+      echo "Adding ${CFGKEYS[(($i+1))]} to $CONFIG..."
+      echo "" >> $CONFIG
+      echo "# ${CFGKEYS[$i]}" >> $CONFIG
+      echo "#${CFGKEYS[(($i+1))]}=${CFGKEYS[(($i+2))]}" >> $CONFIG
+    fi
+
+  done
+}
+
+function remove(){
+  testPerms
+  
+  for ((i=0; i<${#CFGKEYS[@]}; i+=3)); do
+    echo "Removing ${CFGKEYS[(($i+1))]} from $CONFIG..."
+    sed "$!N;/${CFGKEYS[$i]}/!P;D" "$CONFIG" | sed "/.*${CFGKEYS[(($i+1))]}=.*/d" > "$TMPCFG"
+    cp "$TMPCFG" "$CONFIG"
+  done
+  rm $TMPCFG
+}
+
+function h(){
+  echo "$0: Usage:"
+  echo "$0 -i [ CONFIGFILE ] - Install config keys to config file. Configfile optional."
+  echo "$0 -r [ CONFIGFILE ] - Remove config keys from config file. Configfile optional."
+}
+
+if [ -n "$2" ]; then
+  CONFIG="$2"
+fi
+
+case $1 in
+"-i")
+  append
+  ;;
+
+"-r")
+  remove
+  ;;
+
+*)
+  h
+esac

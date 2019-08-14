@@ -1,2 +1,37 @@
 # grub-ownership
-Show an owner when grub is booting up
+Show an owner when grub is booting up.
+
+## Installation
+
+```
+sudo make install
+# OR with an autotools like PREFIX:
+sudo PREFIX=/another/root make install
+```
+
+
+## Configuration
+
+Edit the file `/etc/default/grub`.
+
+This is an example config
+
+```
+# Name and mail address of owner
+OWNER="Alex Alexsen <a@a.tld>"
+
+# Amounts of seconds for how long the owner information is displayed. It is skippable via ESC.
+OWNER_TIMEOUT=10
+```
+
+
+
+## Uninstall
+
+```
+sudo make uninstall
+# OR with an autotools like PREFIX:
+sudo PREFIX=/another/root make uninstall
+```
+
+

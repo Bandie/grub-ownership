@@ -4,10 +4,10 @@ Show an owner when grub is booting up.
 It is looking like this:
 
 ```
-##########################
-# Owner:                 #
-# Alex Alexsen <a@a.tld> #
-##########################
+    ##########################
+    # Owner:                 #
+    # Alex Alexsen <a@a.tld> #
+    ##########################
 ```
 
 

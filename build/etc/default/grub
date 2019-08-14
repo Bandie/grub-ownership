@@ -1,6 +1,0 @@
-
-# Name and mail address of owner
-#OWNER="John Doe <john@doe.tld>"
-
-# Amounts of seconds for how long the owner information is displayed. It is skippable via ESC. Default: 5
-#OWNER_TIMEOUT=5

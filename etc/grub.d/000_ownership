@@ -25,7 +25,7 @@ for ((i=${#OWNER}; i<6; i++)); do
 done
 
 ## Generate border around the owner message
-B="##########"
+B="    ##########"
 for ((i=6; i<${#OWNER}; i++)); do
 	B="${B}#"
 	SPACE="$SPACE "
@@ -42,8 +42,8 @@ fi
 cat << EOF
 echo ""
 echo "$B"
-echo "# Owner: ${SPACE}#"
-echo "# $OWNER $NSP#"
+echo "    # Owner: ${SPACE}#"
+echo "    # $OWNER $NSP#"
 echo "$B"
 echo ""
 echo ""
